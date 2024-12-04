@@ -227,7 +227,7 @@ button:hover {
 
   .form-group input {
     font-size: 0.8rem;
-    
+    padding: 8px;
   }
 
   button {
