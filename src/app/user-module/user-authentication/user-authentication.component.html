@@ -1,0 +1,49 @@
+<!-- Profile Icon -->
+<div class="profile-icon" (click)="toggleLoginForm()">
+  <i class="fas fa-user"></i> <!-- You can replace this with an image/icon of your choice -->
+</div>
+
+<!-- Login Form -->
+<div *ngIf="isLoginFormVisible" class="login-form-container">
+  <div class="form-wrapper">
+    <!-- Close button -->
+    <span class="close-btn" (click)="closeForm()">&times;</span>
+
+    <!-- Form Title -->
+    <div class="form-title">
+      <h2>Login</h2>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="emailOrPhone">Email or Phone</label>
+        <input type="text" formControlName="emailOrPhone" placeholder="Enter email or phone">
+        <span *ngIf="submitted && loginForm.get('emailOrPhone')?.errors?.['required']">This field is required.</span>
+        <span *ngIf="submitted && loginForm.get('emailOrPhone')?.errors?.['pattern']">Invalid email or phone
+          number.</span>
+      </div>
+
+      <div class="form-group" style="position: relative;">
+        <label for="password">Password</label>
+        <input [type]="passwordFieldType" formControlName="password" placeholder="Enter password">
+        <i class="fas fa-eye password-toggle" (click)="togglePasswordVisibility()"></i> <!-- Password toggle button -->
+        <span *ngIf="submitted && loginForm.get('password')?.errors?.['required']">Password is required.</span>
+        <span *ngIf="submitted && loginForm.get('password')?.errors?.['minlength']">Password must be at least 6
+          characters.</span>
+      </div>
+
+      <div class="forgot-pass">
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <!-- Centered login button with wrapper -->
+      <div style="text-align: center;">
+        <button type="submit" [disabled]="loading" class="login-btn">Login</button>
+      </div>
+
+      <div class="signup-link">
+        Not a member? <a routerLink="/user/register">Signup now</a>
+      </div>
+    </form>
+  </div>
+</div>

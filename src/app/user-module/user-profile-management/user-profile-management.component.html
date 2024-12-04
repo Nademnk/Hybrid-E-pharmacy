@@ -1,0 +1,51 @@
+
+<div class="user-profile">
+    <h2>User Profile</h2>
+    
+    <form [formGroup]="profileForm" (ngSubmit)="onUpdateProfile()">
+      <div *ngIf="isLoading" class="loading-spinner">Loading...</div>
+       
+
+       <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" class="form-control" placeholder="Enter your name">
+        <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+          <small class="text-danger">Name is required</small>
+        </div>
+      </div>
+
+       <!-- Email Field -->
+       <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" class="form-control" placeholder="Enter your email">
+        <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+          <small *ngIf="profileForm.get('email')?.errors?.['required']" class="text-danger">Email is required</small>
+          <small *ngIf="profileForm.get('email')?.errors?.['email']" class="text-danger">Invalid email format</small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input id="phone" type="text" formControlName="phone" class="form-control" placeholder="Enter your phone number">
+        <div *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched">
+          <small *ngIf="profileForm.get('phone')?.errors?.['required']" class="text-danger">Phone is required</small>
+          <small *ngIf="profileForm.get('phone')?.errors?.['pattern']" class="text-danger">Phone must be a valid 10-digit number</small>
+        </div>
+      </div>
+      
+  
+    
+  
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input id="address" type="text" formControlName="address" class="form-control" placeholder="Enter your address">
+        <div *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched">
+          <small class="text-danger">Address is required</small>
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading">Update Profile</button>
+    </form>
+  </div>
+  
